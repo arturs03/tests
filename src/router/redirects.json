@@ -1,0 +1,5 @@
+{
+    "/redirect/old": "/redirect/new",
+    "/redirect/1": "/redirect/2",
+    "/redirect/test": "/redirect/prod"
+}
