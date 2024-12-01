@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { defineProps, ref, defineEmits } from 'vue'
+import { ref } from 'vue'
 
 const props = defineProps<{ list?: string[] }>()
 
@@ -14,7 +14,6 @@ function setPickedItem(e: MouseEvent | KeyboardEvent) {
     return
   }
 
-  console.log(target.innerHTML)
   if (target.className.includes('suggested-list__item')) {
     emit('selected', target.innerHTML)
   }
@@ -55,7 +54,7 @@ function debounce(callback: () => void) {
         <span
           v-for="(suggestion, index) in props.list"
           :key="index"
-          tabindex="0"
+          v-focusable
           class="suggested-list__item"
         >
           {{ suggestion }}

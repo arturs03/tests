@@ -15,35 +15,10 @@ const routes: RouteRecordRaw[] = [
   },
 ]
 
-Object.entries(REDIRECTS_JSON).forEach(([oldPath, newPath]) => {
-  const existingRoute = routes.find((route) => {
-    const hasDynamicPath = route.path.indexOf(':')
-    if (hasDynamicPath) {
-      const withoutDynamicParamPath = route.path.slice(0, hasDynamicPath - 1),
-        oldPathLastElement = oldPath.lastIndexOf('/'),
-        oldPathFormatted = oldPath.substring(0, oldPathLastElement)
-
-      return withoutDynamicParamPath === oldPathFormatted
-    }
-
-    return route.path === oldPath
-  })
-
-  if (existingRoute?.path) {
-    const redirect = {
-      path: oldPath,
-      redirect: newPath,
-    }
-
-    if (existingRoute.children?.length) {
-      existingRoute.children.push(redirect)
-    } else {
-      existingRoute.children = [redirect]
-    }
-  }
-})
-
-console.log(routes)
+Object.entries(REDIRECTS_JSON).forEach(([oldPath, newPath]) => ({
+  path: oldPath,
+  redirect: newPath,
+}))
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),

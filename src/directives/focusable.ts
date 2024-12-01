@@ -1,16 +1,13 @@
 import type { Directive } from 'vue'
 
 declare module 'vue' {
-  export interface ComponentCustomProperties {
-    'v-focusable': Directive<HTMLElement, undefined>
+  interface ComponentCustomProperties {
+    vFocusable: Directive<HTMLElement>
   }
 }
 
-export default [
-  'v-focusable',
-  {
-    mounted: (el: HTMLElement) => {
-      el.setAttribute('tabindex', '0')
-    },
+export default {
+  mounted: (el: HTMLElement) => {
+    el.setAttribute('tabindex', '0')
   },
-] as [string, Directive]
+} as Directive<HTMLElement, undefined>
